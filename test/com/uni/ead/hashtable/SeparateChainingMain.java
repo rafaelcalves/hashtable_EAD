@@ -1,3 +1,5 @@
+package com.uni.ead.hashtable;
+
 public class SeparateChainingMain {
     public static void main(String[] args) {
         HashtableSeparateChaining separateChaining = new HashtableSeparateChaining(10);

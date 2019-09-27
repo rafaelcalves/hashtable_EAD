@@ -1,3 +1,5 @@
+package com.uni.ead.hashtable;
+
 public abstract class AbstractHashtable<V> implements Hashtable<V>{
     protected Object[] array;
 
@@ -17,5 +19,9 @@ public abstract class AbstractHashtable<V> implements Hashtable<V>{
         Item removed = (Item)array[index];
         array[index] = null;
         return removed;
+    }
+
+    public int getSize(){
+        return array.length;
     }
 }

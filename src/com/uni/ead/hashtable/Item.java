@@ -1,7 +1,9 @@
+package com.uni.ead.hashtable;
+
 import java.util.Objects;
 
 /**
- * Classe Item que representa um item contendo uma chave (key) e um valor associado a esta
+ * Classe com.uni.ead.hashtable.Item que representa um item contendo uma chave (key) e um valor associado a esta
  chave (value).
  * A chave sempre deverá ser um inteiro.
  * Não altere essa classe, apenas a utilize em sua implementação.
@@ -10,13 +12,13 @@ import java.util.Objects;
 public class Item<V> {
 
     /**
-     * Variaveis privadas do objeto Item, que armazenam a chave (key) e um valor associado a
+     * Variaveis privadas do objeto com.uni.ead.hashtable.Item, que armazenam a chave (key) e um valor associado a
      esta chave (value)
      */
     private int key;
     private V value;
     /**
-     * Metodo construtor da classe Item
+     * Metodo construtor da classe com.uni.ead.hashtable.Item
      * @param key - chave do tipo int
      * @param value - valor do tipo V
      */
