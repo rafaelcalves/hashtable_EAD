@@ -75,14 +75,14 @@ public class HashtableOpenAddressing<V> extends AbstractHashtable<V> {
     public Item<V> search(int key) {
         int index = getIndex(key);
 
-        if (hasKey((Item)array[index],key))return (Item) array[index];
         if (isNull(array[index])) return null;
+        if (hasKey((Item)array[index],key))return (Item) array[index];
 
         for (int j = 0; j < array.length; j++) {
             ProbingStrategy probingStrategy = new ProbingStrategy();
             index = probingStrategy.getIndex(this, index, j);
-            if (hasKey((Item)array[index],key))return (Item) array[index];
             if (isNull(array[index])) return null;
+            if (hasKey((Item)array[index],key))return (Item) array[index];
         }
         return null;
     }
@@ -90,7 +90,7 @@ public class HashtableOpenAddressing<V> extends AbstractHashtable<V> {
     @Override
     public void print() {
         for (Object item: array){
-            System.out.println(item.toString() + " ");
+            System.out.print(item + " ");
         }
     }
 

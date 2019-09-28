@@ -8,9 +8,9 @@ import com.uni.ead.hashtable.probing.handlers.QuadraticProbingHandler;
 import com.uni.ead.hashtable.probing.handlers.base.ProbingHandler;
 
 public class ProbingStrategy {
-    private static final int LINEAR_PROBING = 0;
-    private static final int QUADRATIC_PROBING = 1;
-    private static final int DOUBLE_PROBING = 2;
+    public static final int LINEAR_PROBING = 0;
+    public static final int QUADRATIC_PROBING = 1;
+    public static final int DOUBLE_PROBING = 2;
 
     public int getIndex(HashtableOpenAddressing hashtable, int key, int iterator){
         ProbingHandler probingHandler = null;
