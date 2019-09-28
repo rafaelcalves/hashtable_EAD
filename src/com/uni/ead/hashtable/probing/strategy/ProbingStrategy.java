@@ -1,4 +1,4 @@
-package com.uni.ead.hashtable.probing;
+package com.uni.ead.hashtable.probing.strategy;
 
 import com.uni.ead.hashtable.HashtableOpenAddressing;
 import com.uni.ead.hashtable.probing.handlers.DefaultProbingHandler;
@@ -12,7 +12,7 @@ public class ProbingStrategy {
     private static final int QUADRATIC_PROBING = 1;
     private static final int DOUBLE_PROBING = 2;
 
-    public int getIndex(HashtableOpenAddressing hashtable, int key){
+    public int getIndex(HashtableOpenAddressing hashtable, int key, int iterator){
         ProbingHandler probingHandler = null;
 
         switch (hashtable.getProbing()){
@@ -30,7 +30,7 @@ public class ProbingStrategy {
                 break;
         }
 
-        return probingHandler.getIndex(hashtable, key);
+        return probingHandler.getIndex(hashtable, key, iterator);
 
     }
 }

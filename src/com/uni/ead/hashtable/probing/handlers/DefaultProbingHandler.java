@@ -5,7 +5,7 @@ import com.uni.ead.hashtable.probing.handlers.base.ProbingHandler;
 
 public class DefaultProbingHandler implements ProbingHandler {
     @Override
-    public int getIndex(HashtableOpenAddressing hashtable, int key) throws IllegalArgumentException{
+    public int getIndex(HashtableOpenAddressing hashtable, int key, int iterator) throws IllegalArgumentException{
         throw new IllegalArgumentException();
     }
 }
