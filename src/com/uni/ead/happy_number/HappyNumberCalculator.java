@@ -4,6 +4,7 @@ import com.uni.ead.hashtable.Hashtable;
 import com.uni.ead.hashtable.HashtableSeparateChaining;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static java.util.Objects.isNull;
@@ -14,7 +15,7 @@ Solução basead na url: https://leetcode.com/problems/happy-number/
 
 public class HappyNumberCalculator {
     public boolean isHappy(int number){
-        Hashtable<Integer> log = new HashtableSeparateChaining(10);
+        Hashtable<Integer> log = new HashtableSeparateChaining<>(10);
         return iterateHappiness(number, log);
     }
 
@@ -41,7 +42,7 @@ public class HappyNumberCalculator {
     protected int sumSquares(List<Integer> digits){
         int squaresSum = 0;
         for (int digit:digits) {
-            squaresSum += digit;
+            squaresSum += Math.pow(digit,2);
         }
         return squaresSum;
     }
