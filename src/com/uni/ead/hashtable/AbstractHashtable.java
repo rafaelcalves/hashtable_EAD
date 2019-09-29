@@ -24,4 +24,9 @@ public abstract class AbstractHashtable<V> implements Hashtable<V>{
     public int getSize(){
         return array.length;
     }
+
+    @Override
+    public int insertPair(int key, V value){
+        return insert(new Item(key,value));
+    }
 }

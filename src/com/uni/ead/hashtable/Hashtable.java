@@ -36,4 +36,6 @@ public interface Hashtable<V> {
      */
 
     public void print ();
+
+    public int insertPair(int key, V value);
 }
