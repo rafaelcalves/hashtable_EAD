@@ -13,35 +13,35 @@ public class HashtableSeparateChaining<V> extends AbstractHashtable<V> {
 
     @Override
     public Item<V> delete(int key) {
-        int index = getIndex(key);
-        if (isList(array[index])) {
-            List<Item> itemList = (List<Item>) array[index];
+        int hash = getHash(key);
+        if (isList(array[hash])) {
+            List<Item> itemList = (List<Item>) array[hash];
             return removeFromList(key, itemList);
         }
-        return clearPosition(index);
+        return clearPosition(hash);
     }
 
     @Override
     public int insert(Item<V> item) {
-        int index = getIndex(item.getKey());
+        int hash = getHash(item.getKey());
 
-        if(nonNull(array[index])) {
-            addToList(item, index);
+        if(nonNull(array[hash])) {
+            addToList(item, hash);
         } else {
-            array[index] = item;
+            array[hash] = item;
         }
-        return index;
+        return hash;
     }
 
     @Override
     public Item<V> search(int key) {
-        int index = getIndex(key);
-        if(nonNull(array[index])) {
-            if (isList(array[index])) {
-                List<Item> itemList = (List<Item>) array[index];
+        int hash = getHash(key);
+        if(nonNull(array[hash])) {
+            if (isList(array[hash])) {
+                List<Item> itemList = (List<Item>) array[hash];
                 return getFromList(itemList, key);
             }
-            Item item = (Item) array[index];
+            Item item = (Item) array[hash];
             if (hasKey(item, key)) return item;
         }
         return null;
@@ -51,8 +51,10 @@ public class HashtableSeparateChaining<V> extends AbstractHashtable<V> {
     public void print() {
         for (Object item: array) {
             if(isList(item)){
+                System.out.print("[");
                 for (Item collisionItem: (List<Item>) item)
                     System.out.print(collisionItem + " ");
+                System.out.print("]");
             } else {
                 System.out.print(item + " ");
             }

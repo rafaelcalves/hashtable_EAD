@@ -6,7 +6,7 @@ import com.uni.ead.hashtable.probing.handlers.base.ProbingHandler;
 public class LinearProbingHandler implements ProbingHandler {
 
     @Override
-    public int getIndex(HashtableOpenAddressing hashtable, int key, int iterator) {
-        return key + iterator % hashtable.getSize();
+    public int getHash(HashtableOpenAddressing hashtable, int key, int iterator) {
+        return (key + iterator) % hashtable.getSize();
     }
 }

@@ -12,7 +12,7 @@ public class ProbingStrategy {
     public static final int QUADRATIC_PROBING = 1;
     public static final int DOUBLE_PROBING = 2;
 
-    public int getIndex(HashtableOpenAddressing hashtable, int key, int iterator){
+    public int getHash(HashtableOpenAddressing hashtable, int key, int iterator){
         ProbingHandler probingHandler = null;
 
         switch (hashtable.getProbing()){
@@ -30,7 +30,7 @@ public class ProbingStrategy {
                 break;
         }
 
-        return probingHandler.getIndex(hashtable, key, iterator);
+        return probingHandler.getHash(hashtable, key, iterator);
 
     }
 }

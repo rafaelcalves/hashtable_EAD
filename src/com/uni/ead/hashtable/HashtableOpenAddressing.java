@@ -18,35 +18,35 @@ public class HashtableOpenAddressing<V> extends AbstractHashtable<V> {
     @Override
     public Item<V> delete(int key) {
         Item toRemove;
-        int index = getIndex(key);
-        if (isNull(array[index])) return null;
-        if (hasKey((Item)array[index],key)){
-            toRemove = (Item)array[index];
-            array[index] = new DeletedItem();
+        int hash = getHash(key);
+        if (isNull(array[hash])) return null;
+        if (hasKey((Item)array[hash],key)){
+            toRemove = (Item)array[hash];
+            array[hash] = new DeletedItem();
             return toRemove;
         }
 
-        return collisionDelete(key, index, 0);
+        return collisionDelete(key, hash, 0);
     }
 
     @Override
     public int insert(Item<V> item) {
-        int index = getIndex(item.getKey());
-        if(isEmpty(array[index])){
-            array[index] = item;
-            return index;
+        int hash = getHash(item.getKey());
+        if(isEmpty(array[hash])){
+            array[hash] = item;
+            return hash;
         }
-        return collisionInsert(item, index, 0);
+        return collisionInsert(item, hash, 0);
     }
 
     @Override
     public Item<V> search(int key) {
-        int index = getIndex(key);
+        int hash = getHash(key);
 
-        if (isNull(array[index])) return null;
-        if (hasKey((Item)array[index],key))return (Item) array[index];
+        if (isNull(array[hash])) return null;
+        if (hasKey((Item)array[hash],key))return (Item) array[hash];
 
-        return collisionSearch(key, index, 0);
+        return collisionSearch(key, hash, 0);
     }
 
     @Override
@@ -56,38 +56,38 @@ public class HashtableOpenAddressing<V> extends AbstractHashtable<V> {
         }
     }
 
-    private Item<V> collisionDelete(int key, int index, int iterator){
+    private Item<V> collisionDelete(int key, int hash, int iterator){
         if(iterator >= array.length) return null;
 
-        index = getCollisionIndex(index, iterator);
-        if (isNull(array[index])) return null;
-        if (hasKey((Item)array[index],key)){
-            Item toRemove = (Item)array[index];
-            array[index] = new DeletedItem();
+        int collisionHash = getCollisionHash(hash, iterator);
+        if (isNull(array[collisionHash])) return null;
+        if (hasKey((Item)array[collisionHash],key)){
+            Item toRemove = (Item)array[collisionHash];
+            array[collisionHash] = new DeletedItem();
             return toRemove;
         }
 
-        return collisionDelete(key, index, iterator + 1);
+        return collisionDelete(key, hash, iterator + 1);
     }
 
-    private int collisionInsert(Item<V> item, int index, int iterator) {
+    private int collisionInsert(Item<V> item, int hash, int iterator) {
         if(iterator >= array.length) return -1;
-        index = getCollisionIndex(index, iterator);
-        if (isEmpty(array[index])) {
-            array[index] = item;
-            return index;
+        int collisionHash = getCollisionHash(hash, iterator);
+        if (isEmpty(array[collisionHash])) {
+            array[collisionHash] = item;
+            return collisionHash;
         }
-        return collisionInsert(item, index, iterator + 1);
+        return collisionInsert(item, hash, iterator + 1);
     }
 
-    private Item<V> collisionSearch(int key, int index, int iterator) {
+    private Item<V> collisionSearch(int key, int hash, int iterator) {
         if(iterator >= array.length) return null;
 
-        index = getCollisionIndex(index, iterator);
-        if (isNull(array[index])) return null;
-        if (hasKey((Item)array[index],key))return (Item) array[index];
+        int collisionHash = getCollisionHash(hash, iterator);
+        if (isNull(array[collisionHash])) return null;
+        if (hasKey((Item)array[collisionHash],key))return (Item) array[collisionHash];
 
-        return collisionSearch(key, index, iterator + 1);
+        return collisionSearch(key, hash, iterator + 1);
     }
 
     private boolean isEmpty(Object item) {
@@ -95,10 +95,10 @@ public class HashtableOpenAddressing<V> extends AbstractHashtable<V> {
     }
 
 
-    private int getCollisionIndex(int index, int j) {
+    private int getCollisionHash(int hash, int j) {
         ProbingStrategy probingStrategy = new ProbingStrategy();
-        index = probingStrategy.getIndex(this, index, j);
-        return index;
+        hash = probingStrategy.getHash(this, hash, j);
+        return hash;
     }
 
     public int getQ() {

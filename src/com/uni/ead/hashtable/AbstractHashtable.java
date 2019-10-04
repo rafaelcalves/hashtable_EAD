@@ -7,7 +7,7 @@ public abstract class AbstractHashtable<V> implements Hashtable<V>{
         array = new Object[m];
     }
 
-    protected int getIndex(int key){
+    protected int getHash(int key){
         return key % this.array.length;
     }
 
@@ -15,9 +15,9 @@ public abstract class AbstractHashtable<V> implements Hashtable<V>{
         return item.getKey() == key;
     }
 
-    protected Item<V> clearPosition(int index) {
-        Item removed = (Item)array[index];
-        array[index] = null;
+    protected Item<V> clearPosition(int hash) {
+        Item removed = (Item)array[hash];
+        array[hash] = null;
         return removed;
     }
 
